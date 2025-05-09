@@ -7,7 +7,7 @@
 ```
 
 - 생성 후 해당 브랜치로 바로 이동
-- ex. feature/koo_jun_hyeok
+- ex. feature/kim_joo_hee
 
 ## Pull Request
 
