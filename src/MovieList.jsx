@@ -25,6 +25,8 @@ const MovieList = () => {
     setMovies(resultList);
   }, []);
 
+  const btnStyle = "bg-gray-200 border px-2 cursor-pointer";
+
   return (
     <div className="text-center">
       <ul>
@@ -32,12 +34,8 @@ const MovieList = () => {
           <li key={movie.id} className="space-y-3 pt-3">
             <div>{movie.title}</div>
             <div>Description for {movie.title}</div>
-            <button className="bg-gray-200 border px-2 cursor-pointer">
-              시청한 영화 담기
-            </button>
-            <button className="bg-gray-200 border px-2 cursor-pointer">
-              볼 영화 담기
-            </button>
+            <button className={btnStyle}>시청한 영화 담기</button>
+            <button className={btnStyle}>볼 영화 담기</button>
             <hr />
           </li>
         ))}
