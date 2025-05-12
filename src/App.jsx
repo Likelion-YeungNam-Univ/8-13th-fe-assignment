@@ -1,7 +1,12 @@
 import React from "react";
+import FetchMovies from "./fetchMovies";
 
 const App = () => {
-  return <div>App</div>;
+  return (
+    <div>
+      <FetchMovies/>
+    </div>
+  );
 };
 
 export default App;
