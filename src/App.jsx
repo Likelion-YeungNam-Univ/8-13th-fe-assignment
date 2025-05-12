@@ -15,7 +15,7 @@ const App = () => {
         </div>
 
         {/* Center */}
-        <div className="w-3/5">
+        <div className="w-3/5 overflow-y-auto max-h-[calc(100vh-160px)]">
           <MovieList />
         </div>
 
