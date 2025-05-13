@@ -15,7 +15,12 @@ const MainPanel = ({ allMovies, moveMovie }) => {
 						>
 							시청한영화 담기
 						</button>
-						<button className="border">볼 영화 담기</button>
+						<button
+							className="border"
+							onClick={() => moveMovie(movie, "willWatch")}
+						>
+							볼 영화 담기
+						</button>
 					</div>
 				</div>
 			))}
