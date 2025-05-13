@@ -49,7 +49,9 @@ const App = () => {
 
 	return (
 		<div className="flex flex-col h-screen">
-			<header className="bg-black text-white text-center">Movie List</header>
+			<header className="h-[25px] bg-black text-white text-center">
+				Movie List
+			</header>
 			<main className="flex flex-1 overflow-hidden">
 				{/* 왼쪽 패널, 시청한 영화 목록 */}
 				<LeftPanel watched={watched} removeMovie={removeMovie} />
@@ -66,7 +68,9 @@ const App = () => {
 				{/* 오른쪽 패널, 볼 영화 목록 */}
 				<RightPanel willWatch={willWatch} removeMovie={removeMovie} />
 			</main>
-			<footer className="bg-black text-white text-center">Footer</footer>
+			<footer className="h-[25px] bg-black text-white text-center">
+				Footer
+			</footer>
 		</div>
 	);
 };
