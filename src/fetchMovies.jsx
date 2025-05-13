@@ -36,24 +36,26 @@ const FetchMovies = () => {
     loadMovies();
   }, []);
 
+  const sortById = (list) => list.sort((a, b) => a.id - b.id);
+
   const addWatched = (movie) => {
-    setWatched((prev) => [...prev, movie]);
-    setMovies((prev) => prev.filter((m) => m.id !== movie.id));
+    setWatched((prev) => sortById([...prev, movie]));
+    setMovies((prev) => sortById(prev.filter((m) => m.id !== movie.id)));
   };
   
   const addToWatchList = (movie) => {
-    setToWatch((prev) => [...prev, movie]);
-    setMovies((prev) => prev.filter((m) => m.id !== movie.id));
+    setToWatch((prev) => sortById([...prev, movie]));
+    setMovies((prev) => sortById(prev.filter((m) => m.id !== movie.id)));
   };
 
   const removeWatchedList = (movie) => {
-    setWatched((prev) => prev.filter((m) => m.id !== movie.id));
-    setMovies((prev) => [...prev, movie].sort((a, b) => a.id - b.id));
+    setWatched((prev) => sortById(prev.filter((m) => m.id !== movie.id)));
+    setMovies((prev) => sortById([...prev, movie]));
   };
 
   const removeToWatchList = (movie) => {
-    setToWatch((prev) => prev.filter((m) => m.id !== movie.id));
-    setMovies((prev) => [...prev, movie].sort((a, b) => a.id - b.id));
+    setToWatch((prev) => sortById(prev.filter((m) => m.id !== movie.id)));
+    setMovies((prev) => sortById([...prev, movie]));
   };
 
   if (loading) {
