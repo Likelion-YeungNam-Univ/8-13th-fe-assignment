@@ -2,19 +2,17 @@ import React, { useEffect, useState } from "react";
 
 const fetchMovies = () => {
   const movies = [];
-
-  // movies 배열 안에 객체 형태의 데이터 추가
   for (let i = 1; i <= 2500; i++) {
     movies.push({
       id: i,
       title: `Movie ${i}`,
       description: `Description for Movie ${i}`,
     });
-    console.log("2500개의 영화 목록을 가져오는 중...");
   }
 
-  // fetchMovies함수가 동작하는데 오래 걸린다고 가정하기 위한 코드
-  alert("데이터를 가져오는 중입니다...");
+  setTimeout(() => {
+    alert("데이터를 가져오는 중입니다...");
+  }, 0);
 
   return movies;
 };
@@ -24,7 +22,6 @@ const MovieList = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // 화면이 먼저 렌더링되도록 setTimeout으로 비동기 처리
     setTimeout(() => {
       const data = fetchMovies();
       setMovies(data);
@@ -33,25 +30,29 @@ const MovieList = () => {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col h-screen">
+      {/* Header */}
       <div className="bg-black text-white text-4xl font-bold text-center p-4">
         Movie List
       </div>
 
-      <div className="flex-1 flex items-center justify-center">
+      {/* 영화 목록만 스크롤 가능하게 설정 */}
+      <div className="flex-1 overflow-y-auto px-4 py-2">
         {loading ? (
-          <div className="text-2xl font-bold">Loading...</div>
+          <div className="text-2xl font-bold text-center mt-10">Loading...</div>
         ) : (
-          <ul>
+          <ul className="space-y-2">
             {movies.map((movie) => (
               <li key={movie.id}>
-                {movie.title} - {movie.description}
+                <span className="font-bold">{movie.title}</span> -{" "}
+                {movie.description}
               </li>
             ))}
           </ul>
         )}
       </div>
 
+      {/* Footer */}
       <div className="bg-black text-white text-4xl font-bold text-center p-4">
         Footer
       </div>
