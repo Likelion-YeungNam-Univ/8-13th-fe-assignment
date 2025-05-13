@@ -17,7 +17,7 @@ const App = () => {
 
 	const fetchMovies = () => {
 		const movies = [];
-		for (let i = 1; i <= 2500; i++) {
+		for (let i = 1; i <= 50; i++) {
 			movies.push({
 				id: i,
 				title: `Movie ${i}`,
@@ -28,18 +28,30 @@ const App = () => {
 		return movies;
 	};
 
+	const moveMovie = (movie, listType) => {
+		setAllMovies((prev) => prev.filter((m) => m.id !== movie.id));
+		if (listType === "watched") setWatched((prev) => [...prev, movie]);
+	};
+
+	const removeMovie = (movie, listType) => {
+		if (listType === "watched") {
+			setWatched((prev) => prev.filter((m) => m.id !== movie.id));
+		}
+		setAllMovies((prev) => [...prev, movie].sort((a, b) => a.id - b.id));
+	};
+
 	return (
 		<div className="flex flex-col h-screen">
 			<header className="bg-black text-white text-center">Movie List</header>
 			<main className="flex flex-1 overflow-hidden">
-				<LeftPanel />
+				<LeftPanel watched={watched} removeMovie={removeMovie} />
 
 				{isLoading ? (
 					<div className="w-[80%] flex justify-center items-center p-2">
 						<span className="text-2xl font-bold">Loading...</span>
 					</div>
 				) : (
-					<MainPanel allMovies={allMovies} />
+					<MainPanel allMovies={allMovies} moveMovie={moveMovie} />
 				)}
 
 				<RightPanel />
