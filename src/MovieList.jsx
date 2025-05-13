@@ -59,7 +59,7 @@ const MovieList = () => {
 
       {/* 영화 목록 부분 */}
       <div className="flex flex-1 justify-between overflow-hidden">
-        {/* 시청한 영화 목록 */}
+        {/* 왼쪽 시청한 영화 목록 */}
         <div className="bg-gray-200 p-5 w-1/5 overflow-y-auto">
           <h2 className="text-center text-2xl py-4">시청한 영화 목록</h2>
           <ul>
@@ -70,7 +70,7 @@ const MovieList = () => {
               >
                 <span>{movie.title}</span>
                 <button
-                  className="bg-gray-100 border px-1 py-0.5 text-sm rounded-lg"
+                  className="bg-gray-100 border px-1 py-0.5 text-sm rounded-lg hover:bg-yellow-200 mt-1"
                   onClick={() => removeFromWatched(movie)}
                 >
                   삭제
@@ -80,7 +80,7 @@ const MovieList = () => {
           </ul>
         </div>
 
-        {/* 전체 영화 목록 */}
+        {/* 가운데 영화 목록 */}
         <div className="flex-1 overflow-y-auto">
           {loading ? (
             <div className="text-center p-8 text-xl">Loading...</div>
@@ -93,15 +93,15 @@ const MovieList = () => {
                 >
                   <span>{movie.title}</span>
                   <span>{movie.description}</span>
-                  <span className="space-x-3">
+                  <span className="space-x-3 my-0.5">
                     <button
-                      className="bg-gray-100 border px-1 py-0.5 text-sm rounded-lg"
+                      className="bg-gray-100 border px-1 py-0.5 text-sm rounded-lg hover:bg-yellow-200"
                       onClick={() => watched(movie)}
                     >
                       시청한 영화 담기
                     </button>
                     <button
-                      className="bg-gray-100 border px-1 py-0.5 text-sm rounded-lg"
+                      className="bg-gray-100 border px-1 py-0.5 text-sm rounded-lg hover:bg-yellow-200"
                       onClick={() => watchLater(movie)}
                     >
                       볼 영화 담기
@@ -113,7 +113,7 @@ const MovieList = () => {
           )}
         </div>
 
-        {/* 볼 영화 목록 */}
+        {/* 오른쪽 볼 영화 목록 */}
         <div className="bg-gray-200 p-5 w-1/5 overflow-y-auto">
           <h2 className="text-center text-2xl py-4">볼 영화 목록</h2>
           <ul>
@@ -124,7 +124,7 @@ const MovieList = () => {
               >
                 <span>{movie.title}</span>
                 <button
-                  className="bg-gray-100 border px-1 py-0.5 text-sm rounded-lg"
+                  className="bg-gray-100 border px-1 py-0.5 text-sm rounded-lg hover:bg-yellow-200 mt-1"
                   onClick={() => removeFromWatchLater(movie)}
                 >
                   삭제
