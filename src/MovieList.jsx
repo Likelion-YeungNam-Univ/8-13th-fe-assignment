@@ -1,6 +1,6 @@
 import React from "react";
 
-const MovieList = ({ movies, onAddToWatched }) => {
+const MovieList = ({ movies, onAddToWatched, onAddToWillWatch }) => {
   const btnStyle =
     "bg-gray-200 border px-2 cursor-pointer hover:bg-gray-600 hover:text-white";
 
@@ -17,7 +17,12 @@ const MovieList = ({ movies, onAddToWatched }) => {
             >
               시청한 영화 담기
             </button>
-            <button className={btnStyle}>볼 영화 담기</button>
+            <button
+              className={btnStyle}
+              onClick={() => onAddToWillWatch(movie.id)}
+            >
+              볼 영화 담기
+            </button>
             <hr className="border-gray-400" />
           </li>
         ))}

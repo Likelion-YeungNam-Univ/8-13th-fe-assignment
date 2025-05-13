@@ -8,6 +8,7 @@ import WillWatchList from "./WillWatchList";
 const App = () => {
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
+  const [willWatch, setWillWatch] = useState([]);
 
   useEffect(() => {
     const fetchMovies = () => {
@@ -37,10 +38,22 @@ const App = () => {
     setMovies(movies.filter((movie) => movie.id !== id));
   };
 
-  const handleDelete = (id) => {
+  const handleAddToWillWatch = (id) => {
+    const movie = movies.find((m) => m.id === id);
+    setWillWatch((prev) => [...prev, movie]);
+    setMovies(movies.filter((movie) => movie.id !== id));
+  };
+
+  const handleDeleteFromWatched = (id) => {
     const movie = watched.find((m) => m.id === id);
     setMovies((prev) => [...prev, movie].sort((a, b) => a.id - b.id));
     setWatched(watched.filter((movie) => movie.id !== id));
+  };
+
+  const handleDeleteFromWillWatch = (id) => {
+    const movie = willWatch.find((m) => m.id === id);
+    setMovies((prev) => [...prev, movie].sort((a, b) => a.id - b.id));
+    setWillWatch(willWatch.filter((movie) => movie.id !== id));
   };
 
   return (
@@ -49,15 +62,25 @@ const App = () => {
       <div className="flex flex-1">
         {/* Left */}
         <div className="w-1/5 bg-gray-100">
-          <WatchedList watchedMovies={watched} onDelete={handleDelete} />
+          <WatchedList
+            watchedMovies={watched}
+            onDelete={handleDeleteFromWatched}
+          />
         </div>
         {/* Center */}
         <div className="w-3/5 overflow-y-auto max-h-[calc(100vh-160px)]">
-          <MovieList movies={movies} onAddToWatched={handleAddToWatched} />
+          <MovieList
+            movies={movies}
+            onAddToWatched={handleAddToWatched}
+            onAddToWillWatch={handleAddToWillWatch}
+          />
         </div>
         {/* Right */}
         <div className="w-1/5 bg-gray-100">
-          <WillWatchList />
+          <WillWatchList
+            willWatchMovies={willWatch}
+            onDelete={handleDeleteFromWillWatch}
+          />
         </div>
       </div>
       <Footer />
