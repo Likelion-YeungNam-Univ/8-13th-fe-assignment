@@ -65,12 +65,12 @@ const MovieList = () => {
           <ul>
             {watchedMovies.map((movie) => (
               <li
-                className="flex flex-col justify-center items-center py-2 border-b-2"
+                className="flex flex-col justify-center items-center py-2 border-b-2 border-gray-300"
                 key={movie.id}
               >
                 <span>{movie.title}</span>
                 <button
-                  className="border p-1 text-sm rounded-lg"
+                  className="bg-gray-100 border px-1 py-0.5 text-sm rounded-lg"
                   onClick={() => removeFromWatched(movie)}
                 >
                   삭제
@@ -88,20 +88,20 @@ const MovieList = () => {
             <ul>
               {movies.map((movie) => (
                 <li
-                  className="flex flex-col justify-center items-center py-2 border-b-2"
+                  className="flex flex-col justify-center items-center py-2 border-b-2 border-gray-300"
                   key={movie.id}
                 >
                   <span>{movie.title}</span>
                   <span>{movie.description}</span>
                   <span className="space-x-3">
                     <button
-                      className="border p-1 text-sm rounded-lg"
+                      className="bg-gray-100 border px-1 py-0.5 text-sm rounded-lg"
                       onClick={() => watched(movie)}
                     >
                       시청한 영화 담기
                     </button>
                     <button
-                      className="border p-1 text-sm rounded-lg"
+                      className="bg-gray-100 border px-1 py-0.5 text-sm rounded-lg"
                       onClick={() => watchLater(movie)}
                     >
                       볼 영화 담기
@@ -119,12 +119,12 @@ const MovieList = () => {
           <ul>
             {watchLaterMovies.map((movie) => (
               <li
-                className="flex flex-col justify-center items-center py-2 border-b-2"
+                className="flex flex-col justify-center items-center py-2 border-b-2 border-gray-300"
                 key={movie.id}
               >
                 <span>{movie.title}</span>
                 <button
-                  className="border p-1 text-sm rounded-lg"
+                  className="bg-gray-100 border px-1 py-0.5 text-sm rounded-lg"
                   onClick={() => removeFromWatchLater(movie)}
                 >
                   삭제
