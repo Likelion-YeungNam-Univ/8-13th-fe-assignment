@@ -10,7 +10,7 @@ const App = () => {
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		const movies = fetchMovies(); // alert 포함
+		const movies = fetchMovies();
 		setAllMovies(movies);
 		setIsLoading(false);
 	}, []);
@@ -39,7 +39,7 @@ const App = () => {
 						<span className="text-2xl font-bold">Loading...</span>
 					</div>
 				) : (
-					<MainPanel />
+					<MainPanel allMovies={allMovies} />
 				)}
 
 				<RightPanel />
