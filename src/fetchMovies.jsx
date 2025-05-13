@@ -22,6 +22,8 @@ const fetchMovies = () => {
 const FetchMovies = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [watched, setWatched] = useState([]);
+  const [toWatch, setToWatch] = useState([]);
 
   useEffect(() => {
     const loadMovies = async () => {
@@ -33,6 +35,26 @@ const FetchMovies = () => {
 
     loadMovies();
   }, []);
+
+  const addWatched = (movie) => {
+    setWatched((prev) => [...prev, movie]);
+    setMovies((prev) => prev.filter((m) => m.id !== movie.id));
+  };
+  
+  const addToWatchList = (movie) => {
+    setToWatch((prev) => [...prev, movie]);
+    setMovies((prev) => prev.filter((m) => m.id !== movie.id));
+  };
+
+  const removeWatchedList = (movie) => {
+    setWatched((prev) => prev.filter((m) => m.id !== movie.id));
+    setMovies((prev) => [...prev, movie].sort((a, b) => a.id - b.id));
+  };
+
+  const removeToWatchList = (movie) => {
+    setToWatch((prev) => prev.filter((m) => m.id !== movie.id));
+    setMovies((prev) => [...prev, movie].sort((a, b) => a.id - b.id));
+  };
 
   if (loading) {
     return (
@@ -57,24 +79,35 @@ const FetchMovies = () => {
       </div>
       <div className="justify-between flex align-center overflow-hidden text-center mt-3">
         <div className="bg-gray-100 w-[250px]">
-        <div className="pt-15 font-bolder ">
+        <div className="pt-15 font-bold ">
             <div className="pb-10 font-bold text-2xl">시청한 영화 목록</div>
-            <div className="border-b p-3">
-              <div></div>
-              <button className="bg-white hover:bg-gray-500 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded">삭제</button>
-            </div>
+              {watched.map((movie) => (
+                <div key={movie.id} className="mb-3 border-b pb-3 border-gray-300">
+                  <div>{movie.title}</div>
+                  <button
+                    onClick={() => removeWatchedList(movie)}
+                    className="text-sm mt-1 px-2 py-1 border rounded bg-white hover:bg-gray-200"
+                  >
+                    삭제
+                  </button>
+                </div>
+              ))}
           </div>
         </div>
-        <ul className="flex-1 overflow-auto">
+        <ul className="flex-1 overflow-auto font-semibold">
           {movies.map((movie) => (
             <li key={movie.id} className="border-b  p-4">
               <div>{movie.title}</div>
               <div>{movie.description}</div>
               <div className="just">
-                <button className="bg-white hover:bg-gray-500 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded mt-4 mr-3">
+                <button
+                  onClick={() => addWatched(movie)} 
+                  className="bg-white hover:bg-gray-500 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded mt-4 mr-3">
                   시청한 영화 담기
                 </button>
-                <button className="bg-white hover:bg-gray-500 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded ">
+                <button
+                  onClick={() => addToWatchList(movie)}
+                 className="bg-white hover:bg-gray-500 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded ">
                   볼 영화 담기
                 </button>
               </div>
@@ -86,10 +119,17 @@ const FetchMovies = () => {
       <div className="bg-gray-100 w-[250px]">
         <div className="pt-15 font-bold ">
             <div className="pb-10 font-bold text-2xl">볼 영화 목록</div>
-            <div className="border-b p-3">
-              <div></div>
-              <button className="bg-white hover:bg-gray-500 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded">삭제</button>
-            </div>
+              {toWatch.map((movie) => (
+                <div key={movie.id} className="mb-3 border-b pb-3 border-gray-300">
+                  <div>{movie.title}</div>
+                  <button
+                    onClick={() => removeToWatchList(movie)}
+                    className="text-sm mt-1 px-2 py-1 border rounded bg-white hover:bg-gray-200"
+                  >
+                    삭제
+                  </button>
+                </div>
+              ))}
           </div>
         </div>
       </div>
