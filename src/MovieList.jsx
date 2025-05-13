@@ -1,31 +1,9 @@
 import React, { useEffect, useState } from "react";
+import WatchedList from "./WatchedList";
 
-const MovieList = () => {
-  const [movies, setMovies] = useState([]);
-
-  useEffect(() => {
-    const fetchMovies = () => {
-      const movies = [];
-      for (let i = 1; i <= 2500; i++) {
-        movies.push({
-          id: i,
-          title: `Movie ${i}`,
-          description: `Description for Movie ${i}`,
-        });
-
-        console.log("2500개의 영화 목록을 가져오는 중...");
-      }
-
-      // fetchMovies함수가 동작하는데 오래 걸린다고 가정하기 위한 코드
-      alert("데이터를 가져오는 중입니다...");
-
-      return movies;
-    };
-    const resultList = fetchMovies();
-    setMovies(resultList);
-  }, []);
-
-  const btnStyle = "bg-gray-200 border px-2 cursor-pointer";
+const MovieList = ({ movies, onAddToWatched }) => {
+  const btnStyle =
+    "bg-gray-200 border px-2 cursor-pointer hover:bg-gray-600 hover:text-white";
 
   return (
     <div className="text-center">
