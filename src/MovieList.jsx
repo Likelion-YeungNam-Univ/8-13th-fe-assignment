@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import WatchedList from "./WatchedList";
+import React from "react";
 
 const MovieList = ({ movies, onAddToWatched }) => {
   const btnStyle =
@@ -12,7 +11,12 @@ const MovieList = ({ movies, onAddToWatched }) => {
           <li key={movie.id} className="space-y-3 pt-3">
             <div>{movie.title}</div>
             <div>Description for {movie.title}</div>
-            <button className={btnStyle}>시청한 영화 담기</button>
+            <button
+              className={btnStyle}
+              onClick={() => onAddToWatched(movie.id)}
+            >
+              시청한 영화 담기
+            </button>
             <button className={btnStyle}>볼 영화 담기</button>
             <hr />
           </li>

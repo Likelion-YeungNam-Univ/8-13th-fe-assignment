@@ -7,6 +7,7 @@ import WillWatchList from "./WillWatchList";
 
 const App = () => {
   const [movies, setMovies] = useState([]);
+  const [watched, setWatched] = useState([]);
 
   useEffect(() => {
     const fetchMovies = () => {
@@ -30,17 +31,23 @@ const App = () => {
     setMovies(resultList);
   }, []);
 
+  const handleAddToWatched = (id) => {
+    const movie = movies.find((m) => m.id === id);
+    setWatched((prev) => [...prev, movie]);
+    setMovies(movies.filter((movie) => movie.id !== id));
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
       <div className="flex flex-1">
         {/* Left */}
         <div className="w-1/5 bg-gray-100">
-          <WatchedList />
+          <WatchedList watchedMovies={watched} />
         </div>
         {/* Center */}
         <div className="w-3/5 overflow-y-auto max-h-[calc(100vh-160px)]">
-          <MovieList movies={movies} />
+          <MovieList movies={movies} onAddToWatched={handleAddToWatched} />
         </div>
         {/* Right */}
         <div className="w-1/5 bg-gray-100">
