@@ -18,7 +18,7 @@ const MovieList = ({ movies, onAddToWatched }) => {
               시청한 영화 담기
             </button>
             <button className={btnStyle}>볼 영화 담기</button>
-            <hr />
+            <hr className="border-gray-400" />
           </li>
         ))}
       </ul>
