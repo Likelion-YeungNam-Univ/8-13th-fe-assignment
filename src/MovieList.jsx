@@ -7,27 +7,33 @@ const MovieList = () => {
   const [watchLaterMovies, setWatchLaterMovies] = useState([]);
 
   useEffect(() => {
-    const fetchMovies = () => {
-      const fetchedMovies = [];
+    Promise.resolve().then(() => {
+      const fetchMovies = () => {
+        const fetchedMovies = [];
 
-      // movies 배열 안에 객체 형태의 데이터 추가
-      for (let i = 1; i <= 2500; i++) {
-        fetchedMovies.push({
-          id: i,
-          title: `Movie ${i}`,
-          description: `Description for Movie ${i}`,
-        });
-        console.log("2500개의 영화 목록을 가져오는 중...");
-      }
+        // movies 배열 안에 객체 형태의 데이터 추가
+        for (let i = 1; i <= 2500; i++) {
+          fetchedMovies.push({
+            id: i,
+            title: `Movie ${i}`,
+            description: `Description for Movie ${i}`,
+          });
+          console.log("2500개의 영화 목록을 가져오는 중...");
+        }
 
-      // fetchMovies함수가 동작하는데 오래 걸린다고 가정하기 위한 코드
-      // alert("데이터를 가져오는 중입니다...");
+        console.log("가져오기 완료");
 
-      return fetchedMovies;
-    };
+        // fetchMovies함수가 동작하는데 오래 걸린다고 가정하기 위한 코드
+        alert("데이터를 가져오는 중입니다...");
 
-    setMovies(fetchMovies());
-    setLoading(false);
+        return fetchedMovies;
+      };
+
+      setMovies(fetchMovies());
+      console.log("목록 전달 완료");
+
+      setLoading(false);
+    });
   }, []);
 
   const watched = (movie) => {
