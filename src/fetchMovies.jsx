@@ -36,54 +36,69 @@ const FetchMovies = () => {
 
   if (loading) {
     return (
-      <div className="align-center">
+      <div>
         <div className="text-center border bg-gray-700 text-white font-bold text-2xl p-3"> 
           Movie List
         </div>
-        <div className="mb-7 text-center text-2xl font-bold mt-10">
+        <div className="mb-7 text-center text-xl font-bold mt-10">
         Loading...
         </div>
-        <div className="text-center border bg-gray-700 text-white font-bold text-2xl p-3"> 
+        <div className="text-center border bg-gray-700 text-white font-bold text-xl p-3"> 
             Footer 
         </div>
       </div>
-      
     );
   }
 
-
   return (
-    <div className="justify-center text-center m-3">
-      <div className="text-center border bg-gray-700 text-white font-bold text-2xl p-3">
+    <div className="flex flex-col justify-between text-center h-screen pl-3 pr-3 pb-0.5">
+      <div className="text-center border bg-gray-700  text-white font-bold text-4xl p-6 mt-1 h-[170px]">
         Movie List
       </div>
-      <div className="justify-between flex align-center text-center mt-3">
-        <div className="bg-gray-400 width-{500px} height-{500px}">
-          <div>시청한 영화 목록</div>
+      <div className="justify-between flex align-center overflow-hidden text-center mt-3">
+        <div className="bg-gray-100 w-[250px]">
+        <div className="pt-15 font-bolder ">
+            <div className="pb-10 font-bold text-2xl">시청한 영화 목록</div>
+            <div className="border-b p-3">
+              <div></div>
+              <button className="bg-white hover:bg-gray-500 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded">삭제</button>
+            </div>
+          </div>
         </div>
-        <ul className= "width={500px} height-{500px}">
+        <ul className="flex-1 overflow-auto">
           {movies.map((movie) => (
-            <li key={movie.id}>
+            <li key={movie.id} className="border-b  p-4">
               <div>{movie.title}</div>
               <div>{movie.description}</div>
-              <div>
-                <div>시청한 영화 담기</div>
-                <div>볼 영화 담기</div>  
+              <div className="just">
+                <button className="bg-white hover:bg-gray-500 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded mt-4 mr-3">
+                  시청한 영화 담기
+                </button>
+                <button className="bg-white hover:bg-gray-500 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded ">
+                  볼 영화 담기
+                </button>
               </div>
             </li>
           ))}
         </ul>
-        <div className="bg-gray-200 width-{500px} height-{500px}">
-          <div>볼 영화 목록</div>
+
+
+      <div className="bg-gray-100 w-[250px]">
+        <div className="pt-15 font-bold ">
+            <div className="pb-10 font-bold text-2xl">볼 영화 목록</div>
+            <div className="border-b p-3">
+              <div></div>
+              <button className="bg-white hover:bg-gray-500 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded">삭제</button>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="text-center border bg-gray-700 text-white font-bold text-2xl p-3 mt-3"> 
+
+
+      <div className="text-center border bg-gray-700 text-white font-bold text-4xl p-6 mt-3"> 
         Footer 
       </div>
-
-      
     </div>
-    
   );
 };
 
