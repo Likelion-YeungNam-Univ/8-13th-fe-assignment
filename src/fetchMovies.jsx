@@ -21,27 +21,69 @@ const fetchMovies = () => {
 
 const FetchMovies = () => {
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const data = fetchMovies();
-    setMovies(data);
+    const loadMovies = async () => {
+      setLoading(true); // 로딩 시작
+      const data = await fetchMovies();
+      setMovies(data);
+      setLoading(false); // 로딩 종료
+    };
+
+    loadMovies();
   }, []);
 
+  if (loading) {
+    return (
+      <div className="align-center">
+        <div className="text-center border bg-gray-700 text-white font-bold text-2xl p-3"> 
+          Movie List
+        </div>
+        <div className="mb-7 text-center text-2xl font-bold mt-10">
+        Loading...
+        </div>
+        <div className="text-center border bg-gray-700 text-white font-bold text-2xl p-3"> 
+            Footer 
+        </div>
+      </div>
+      
+    );
+  }
+
+
   return (
-    <div>
-      <ul>
-        {movies.map((movie) => (
-          <li key={movie.id}>
-            <div>{movie.title}</div>
-            <div>{movie.description}</div>
-            <div>
-              <div>시청한 영화 담기</div>
-              <div>볼 영화 담기</div>  
-            </div>
-          </li>
-        ))}
-      </ul>
+    <div className="justify-center text-center m-3">
+      <div className="text-center border bg-gray-700 text-white font-bold text-2xl p-3">
+        Movie List
+      </div>
+      <div className="justify-between flex align-center text-center mt-3">
+        <div className="bg-gray-400 width-{500px} height-{500px}">
+          <div>시청한 영화 목록</div>
+        </div>
+        <ul className= "width={500px} height-{500px}">
+          {movies.map((movie) => (
+            <li key={movie.id}>
+              <div>{movie.title}</div>
+              <div>{movie.description}</div>
+              <div>
+                <div>시청한 영화 담기</div>
+                <div>볼 영화 담기</div>  
+              </div>
+            </li>
+          ))}
+        </ul>
+        <div className="bg-gray-200 width-{500px} height-{500px}">
+          <div>볼 영화 목록</div>
+        </div>
+      </div>
+      <div className="text-center border bg-gray-700 text-white font-bold text-2xl p-3 mt-3"> 
+        Footer 
+      </div>
+
+      
     </div>
+    
   );
 };
 
