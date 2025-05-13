@@ -38,7 +38,7 @@ const FetchMovies = () => {
 
   const sortById = (list) => list.sort((a, b) => a.id - b.id);
 
-  const addWatched = (movie) => {
+  const addWatchedList = (movie) => {
     setWatched((prev) => sortById([...prev, movie]));
     setMovies((prev) => sortById(prev.filter((m) => m.id !== movie.id)));
   };
@@ -103,7 +103,7 @@ const FetchMovies = () => {
               <div>{movie.description}</div>
               <div className="just">
                 <button
-                  onClick={() => addWatched(movie)} 
+                  onClick={() => addWatchedList(movie)} 
                   className="bg-white hover:bg-gray-500 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded mt-4 mr-3">
                   시청한 영화 담기
                 </button>
