@@ -37,13 +37,19 @@ const App = () => {
     setMovies(movies.filter((movie) => movie.id !== id));
   };
 
+  const handleDelete = (id) => {
+    const movie = watched.find((m) => m.id === id);
+    setMovies((prev) => [...prev, movie].sort((a, b) => a.id - b.id));
+    setWatched(watched.filter((movie) => movie.id !== id));
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
       <div className="flex flex-1">
         {/* Left */}
         <div className="w-1/5 bg-gray-100">
-          <WatchedList watchedMovies={watched} />
+          <WatchedList watchedMovies={watched} onDelete={handleDelete} />
         </div>
         {/* Center */}
         <div className="w-3/5 overflow-y-auto max-h-[calc(100vh-160px)]">
