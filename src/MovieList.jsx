@@ -71,65 +71,67 @@ const MovieList = () => {
 
   return (
     <div className="flex flex-col justify-around text-center">
-      <h1>Movie List</h1>
+      <h1 className="text-3xl font-bold bg-gray-800 text-white">Movie List</h1>
       {/*시청한 영화 목록*/}
-      <div className="flex flex-col">
-        <h2>시청한 영화 목록</h2>
-        <ul>
-          {watched.map((movie) => (
-            <li key={movie.id}>
-              {movie.title}
-              <button
-                onClick={() => deleteWatched(movie)}
-                className="border rounded-xl"
-              >
-                삭제
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <div className="flex">
+        <div className="flex flex-col justify-items-center w-1/4 bg-gray-300">
+          <h2>시청한 영화 목록</h2>
+          <ul>
+            {watched.map((movie) => (
+              <li key={movie.id}>
+                {movie.title}
+                <button
+                  onClick={() => deleteWatched(movie)}
+                  className="border rounded-xl p-3"
+                >
+                  삭제
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-      {/*영화 목록*/}
-      <div>
-        <h2></h2>
-        <ul>
-          {movies.slice(0, 10).map((movie) => (
-            <li key={movie.id} className="p-4">
-              {movie.title}
-              <button
-                onClick={() => addWatched(movie)}
-                className="border rounded-xl"
-              >
-                시청한 영화 담기
-              </button>
-              <button
-                onClick={() => addWish(movie)}
-                className="border rounded-xl"
-              >
-                볼 영화 담기
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
+        {/*영화 목록*/}
+        <div className="w-1/2">
+          <h2></h2>
+          <ul>
+            {movies.slice(0, 10).map((movie) => (
+              <li key={movie.id} className="p-4">
+                {movie.title}
+                <button
+                  onClick={() => addWatched(movie)}
+                  className="border rounded-xl p-3"
+                >
+                  시청한 영화 담기
+                </button>
+                <button
+                  onClick={() => addWish(movie)}
+                  className="border rounded-xl p-3"
+                >
+                  볼 영화 담기
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-      {/*볼 영화 목록*/}
-      <div className="flex flex-col">
-        <h2>볼 영화 목록</h2>
-        <ul>
-          {wish.map((movie) => (
-            <li key={movie.id}>
-              {movie.title}
-              <button
-                onClick={() => deleteWish(movie)}
-                className="border rounded-xl"
-              >
-                삭제
-              </button>
-            </li>
-          ))}
-        </ul>
+        {/*볼 영화 목록*/}
+        <div className="flex-col justify-items-center w-1/4 bg-gray-300">
+          <h2>볼 영화 목록</h2>
+          <ul>
+            {wish.map((movie) => (
+              <li key={movie.id}>
+                {movie.title}
+                <button
+                  onClick={() => deleteWish(movie)}
+                  className="border rounded-xl p-3"
+                >
+                  삭제
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
