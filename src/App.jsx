@@ -1,7 +1,7 @@
-import React from "react";
+import MovieList from "./MovieList";
 
 const App = () => {
-  return <div>App</div>;
+  return <MovieList />;
 };
 
 export default App;
