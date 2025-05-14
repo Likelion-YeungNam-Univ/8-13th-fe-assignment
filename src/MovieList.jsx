@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from "react";
 
-// 수정된 fetchMovies
-const fetchMovies = () => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const movies = [];
-      for (let i = 1; i <= 2500; i++) {
-        movies.push({
-          id: i,
-          title: `Movie ${i}`,
-          description: `Description for Movie ${i}`,
-        });
-      }
-      resolve(movies);
-    }, 2000); // fetch가 오래 걸리는 것처럼 보이게
-  });
+const fetchMovies = async () => {
+  const movies = [];
+  for (let i = 1; i <= 2500; i++) {
+    movies.push({
+      id: i,
+      title: `Movie ${i}`,
+      description: `Description for Movie ${i}`,
+    });
+  }
+  return movies;
 };
 
 const MovieList = () => {
@@ -26,8 +21,9 @@ const MovieList = () => {
   useEffect(() => {
     const loadMovies = async () => {
       setLoading(true);
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      alert("데이터를 가져오는 중입니다...");
       const data = await fetchMovies();
-      alert("데이터를 가져오는 중입니다..."); // 이 위치로 옮기면 Loading 먼저 뜸
       setMovies(data);
       setLoading(false);
     };
