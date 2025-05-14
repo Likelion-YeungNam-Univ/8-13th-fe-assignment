@@ -1,23 +1,19 @@
 import React, { useState, useEffect } from "react";
 
+// 수정된 fetchMovies
 const fetchMovies = () => {
   return new Promise((resolve) => {
-    const movies = [];
-
-    // movies 배열 안에 객체 형태의 데이터 추가
-    for (let i = 1; i <= 2500; i++) {
-      movies.push({
-        id: i,
-        title: `Movie ${i}`,
-        description: `Description for Movie ${i}`,
-      });
-      console.log("2500개의 영화 목록을 가져오는 중...");
-    }
-
-    // fetchMovies함수가 동작하는데 오래 걸린다고 가정하기 위한 코드
-    alert("데이터를 가져오는 중입니다...");
-
-    resolve(movies); // 데이터가 다 준비되면 반환
+    setTimeout(() => {
+      const movies = [];
+      for (let i = 1; i <= 2500; i++) {
+        movies.push({
+          id: i,
+          title: `Movie ${i}`,
+          description: `Description for Movie ${i}`,
+        });
+      }
+      resolve(movies);
+    }, 2000); // fetch가 오래 걸리는 것처럼 보이게
   });
 };
 
@@ -31,6 +27,7 @@ const MovieList = () => {
     const loadMovies = async () => {
       setLoading(true);
       const data = await fetchMovies();
+      alert("데이터를 가져오는 중입니다..."); // 이 위치로 옮기면 Loading 먼저 뜸
       setMovies(data);
       setLoading(false);
     };
@@ -69,13 +66,18 @@ const MovieList = () => {
 
       <div className="flex flex-1 overflow-hidden">
         <div className="w-1/4 bg-gray-100 p-4 border-r border-gray-300 overflow-y-auto">
-          <h2 className="text-lg font-bold mb-2">시청한 영화 목록</h2>
+          <h2 className="text-lg font-bold p-4 flex items-center justify-center">
+            시청한 영화 목록
+          </h2>
           <ul className="space-y-2">
             {watched.map((movie) => (
-              <li key={movie.id} className="border-b pb-2">
-                <span className="block font-bold">{movie.title}</span>
+              <li
+                key={movie.id}
+                className="border-b pb-2 flex items-center justify-center gap-1"
+              >
+                <span>{movie.title}</span>
                 <button
-                  className="mt-1 text-sm text-red-500"
+                  className="bg-gray-200 mt-1 text-sm text-black border border-black p-1 rounded-xl"
                   onClick={() => restoreToMain(movie, "watched")}
                 >
                   삭제
@@ -94,17 +96,21 @@ const MovieList = () => {
             <ul className="space-y-4">
               {movies.map((movie) => (
                 <li key={movie.id} className="border-b border-gray-300 pb-4">
-                  <span className="block font-bold">{movie.title}</span>
-                  <span className="block">{movie.description}</span>
-                  <div className="mt-2">
+                  <span className="flex items-center justify-center">
+                    {movie.title}
+                  </span>
+                  <span className="flex items-center justify-center">
+                    {movie.description}
+                  </span>
+                  <div className="mt-2 flex items-center justify-center">
                     <button
-                      className="px-4 py-2 bg-gray-200 text-black border border-black rounded-xl mr-2"
+                      className="text-sm p-1 bg-gray-200 text-black border border-black rounded-sm mr-2"
                       onClick={() => moveToWatched(movie)}
                     >
                       시청한 영화 담기
                     </button>
                     <button
-                      className="px-4 py-2 bg-gray-200 text-black border border-black rounded-xl"
+                      className="text-sm p-1 bg-gray-200 text-black border border-black rounded-sm"
                       onClick={() => moveToToWatch(movie)}
                     >
                       볼 영화 목록
@@ -117,13 +123,18 @@ const MovieList = () => {
         </div>
 
         <div className="w-1/4 bg-gray-100 p-4 border-l border-gray-300 overflow-y-auto">
-          <h2 className="text-lg font-bold mb-2">볼 영화 목록</h2>
+          <h2 className="text-lg font-bold p-4 flex items-center justify-center">
+            볼 영화 목록
+          </h2>
           <ul className="space-y-2">
             {toWatch.map((movie) => (
-              <li key={movie.id} className="border-b pb-2">
-                <span className="block font-bold">{movie.title}</span>
+              <li
+                key={movie.id}
+                className="border-b pb-2 flex items-center justify-center gap-1"
+              >
+                <span>{movie.title}</span>
                 <button
-                  className="mt-1 text-sm text-red-500"
+                  className="bg-gray-200 mt-1 text-sm text-black border border-black p-1 rounded-xl"
                   onClick={() => restoreToMain(movie, "toWatch")}
                 >
                   삭제
