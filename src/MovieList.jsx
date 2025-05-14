@@ -45,61 +45,88 @@ const MovieList = () => {
 
   const addWish = (movie) => {
     setWish((prev) => [...prev, movie]);
-    setMovies((prev) => sortList(prev.filter((m) => m.id != id)));
+    setMovies((prev) => sortList(prev.filter((m) => m.id !== movie.id)));
   };
 
   const addWatched = (movie) => {
     setWatched((prev) => [...prev, movie]);
-    setMovies((prev) => sortList(prev.filter((m) => m.id != id)));
+    setMovies((prev) => sortList(prev.filter((m) => m.id !== movie.id)));
   };
 
   const deleteWish = (movie) => {
-    setWish((prev) => prev.filter((movie) => movie.wish != wish));
-    setMovies((prev) => sortList([...prev, movie]));
+    setWish((prev) => prev.filter((m) => m.id != movie.id));
+    etMovies((prev) => {
+      const exist = prev.some((m) => m.id != movie.id);
+      return exist ? prev : sortList([...prev, movie]);
+    });
   };
 
   const deleteWatched = (movie) => {
-    setWish((prev) => prev.filter((movie) => movie.watched != watched));
-    setMovies((prev) => sortList([...prev, movie]));
+    setWatched((prev) => prev.filter((m) => m.watched != movie.watched));
+    setMovies((prev) => {
+      const exist = prev.some((m) => m.id != movie.id);
+      return exist ? prev : sortList([...prev, movie]);
+    });
   };
 
   return (
-    <div>
+    <div className="flex flex-col justify-around text-center">
       <h1>Movie List</h1>
-      <div>
+      {/*시청한 영화 목록*/}
+      <div className="flex flex-col">
         <h2>시청한 영화 목록</h2>
         <ul>
           {watched.map((movie) => (
             <li key={movie.id}>
               {movie.title}
-              <button onClick={() => deleteWatched(movie)}>삭제</button>
+              <button
+                onClick={() => deleteWatched(movie)}
+                className="border rounded-xl"
+              >
+                삭제
+              </button>
             </li>
           ))}
         </ul>
       </div>
 
+      {/*영화 목록*/}
       <div>
         <h2></h2>
         <ul>
           {movies.slice(0, 10).map((movie) => (
-            <li key={movie.id}>
+            <li key={movie.id} className="p-4">
               {movie.title}
-              <button onClick={() => addWatched(movie)}>
+              <button
+                onClick={() => addWatched(movie)}
+                className="border rounded-xl"
+              >
                 시청한 영화 담기
               </button>
-              <button onClick={() => addWish(movie)}>볼 영화 담기</button>
+              <button
+                onClick={() => addWish(movie)}
+                className="border rounded-xl"
+              >
+                볼 영화 담기
+              </button>
             </li>
           ))}
         </ul>
       </div>
 
-      <div>
+      {/*볼 영화 목록*/}
+      <div className="flex flex-col">
         <h2>볼 영화 목록</h2>
         <ul>
           {wish.map((movie) => (
             <li key={movie.id}>
               {movie.title}
-              <button onClick={() => deleteWish(movie)}>삭제</button>
+              <button
+                onClick={() => deleteWish(movie)}
+                className="border rounded-xl"
+              >
+                삭제
+              </button>
             </li>
           ))}
         </ul>
