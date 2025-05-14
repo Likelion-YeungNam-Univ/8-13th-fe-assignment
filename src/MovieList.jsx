@@ -55,7 +55,7 @@ const MovieList = () => {
 
   const deleteWish = (movie) => {
     setWish((prev) => prev.filter((m) => m.id != movie.id));
-    etMovies((prev) => {
+    setMovies((prev) => {
       const exist = prev.some((m) => m.id != movie.id);
       return exist ? prev : sortList([...prev, movie]);
     });
