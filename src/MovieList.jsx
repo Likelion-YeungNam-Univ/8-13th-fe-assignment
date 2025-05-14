@@ -62,35 +62,33 @@ const MovieList = () => {
       <div className="text-center bg-black text-white p-2 text-3xl">
         Movie List
       </div>
-
-      {/* 영화 목록 부분 */}
-      <div className="flex flex-1 justify-between overflow-hidden">
-        {/* 왼쪽 시청한 영화 목록 */}
-        <div className="bg-gray-200 p-5 w-1/5 overflow-y-auto">
-          <h2 className="text-center text-2xl py-4">시청한 영화 목록</h2>
-          <ul>
-            {watchedMovies.map((movie) => (
-              <li
-                className="flex flex-col justify-center items-center py-2 border-b-2 border-gray-300"
-                key={movie.id}
-              >
-                <span>{movie.title}</span>
-                <button
-                  className="bg-gray-100 border px-1 py-0.5 text-sm rounded-lg hover:bg-yellow-200 mt-1"
-                  onClick={() => removeFromWatched(movie)}
+      {loading ? (
+        <div className="text-center p-8 text-xl">Loading...</div>
+      ) : (
+        <div className="flex flex-1 justify-between overflow-hidden">
+          {/* 왼쪽 시청한 영화 목록 */}
+          <div className="bg-gray-200 p-5 w-1/5 overflow-y-auto">
+            <h2 className="text-center text-2xl py-4">시청한 영화 목록</h2>
+            <ul>
+              {watchedMovies.map((movie) => (
+                <li
+                  className="flex flex-col justify-center items-center py-2 border-b-2 border-gray-300"
+                  key={movie.id}
                 >
-                  삭제
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
+                  <span>{movie.title}</span>
+                  <button
+                    className="bg-gray-100 border px-1 py-0.5 text-sm rounded-lg hover:bg-yellow-200 mt-1"
+                    onClick={() => removeFromWatched(movie)}
+                  >
+                    삭제
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        {/* 가운데 영화 목록 */}
-        <div className="flex-1 overflow-y-auto">
-          {loading ? (
-            <div className="text-center p-8 text-xl">Loading...</div>
-          ) : (
+          {/* 가운데 영화 목록 */}
+          <div className="flex-1 overflow-y-auto">
             <ul>
               {movies.map((movie) => (
                 <li
@@ -116,30 +114,30 @@ const MovieList = () => {
                 </li>
               ))}
             </ul>
-          )}
-        </div>
+          </div>
 
-        {/* 오른쪽 볼 영화 목록 */}
-        <div className="bg-gray-200 p-5 w-1/5 overflow-y-auto">
-          <h2 className="text-center text-2xl py-4">볼 영화 목록</h2>
-          <ul>
-            {watchLaterMovies.map((movie) => (
-              <li
-                className="flex flex-col justify-center items-center py-2 border-b-2 border-gray-300"
-                key={movie.id}
-              >
-                <span>{movie.title}</span>
-                <button
-                  className="bg-gray-100 border px-1 py-0.5 text-sm rounded-lg hover:bg-yellow-200 mt-1"
-                  onClick={() => removeFromWatchLater(movie)}
+          {/* 오른쪽 볼 영화 목록 */}
+          <div className="bg-gray-200 p-5 w-1/5 overflow-y-auto">
+            <h2 className="text-center text-2xl py-4">볼 영화 목록</h2>
+            <ul>
+              {watchLaterMovies.map((movie) => (
+                <li
+                  className="flex flex-col justify-center items-center py-2 border-b-2 border-gray-300"
+                  key={movie.id}
                 >
-                  삭제
-                </button>
-              </li>
-            ))}
-          </ul>
+                  <span>{movie.title}</span>
+                  <button
+                    className="bg-gray-100 border px-1 py-0.5 text-sm rounded-lg hover:bg-yellow-200 mt-1"
+                    onClick={() => removeFromWatchLater(movie)}
+                  >
+                    삭제
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Footer */}
       <div className="text-center bg-black text-white p-2 text-3xl">Footer</div>
