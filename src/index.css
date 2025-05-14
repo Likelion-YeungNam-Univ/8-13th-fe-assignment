@@ -1,1 +1,48 @@
 @import "tailwindcss";
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header,
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  background-color: #f5f5f5;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.side-column {
+  width: 20%;
+  background-color: #eee;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.center-column {
+  width: 60%;
+  padding: 0 20px;
+  overflow-y: auto;
+  max-height: 70vh;
+}
+
+.movie-card {
+  background: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+}
+
+button {
+  margin: 4px;
+}
