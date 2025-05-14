@@ -18,9 +18,9 @@ export default function MovieList() {
   }, []);
 
   const fetchMovies = () => {
-    const arr = [];
+    const movies = [];
     for (let i = 1; i <= 2500; i++) {
-      arr.push({
+      movies.push({
         id: i,
         title: `Movie ${i}`,
         description: `Description for Movie ${i}`,
@@ -28,7 +28,7 @@ export default function MovieList() {
     }
     console.log("2500개의 영화 목록을 가져오는 중...");
     alert("데이터를 가져오는 중입니다...");
-    return arr;
+    return movies;
   };
 
   const addWatched = (m) =>
