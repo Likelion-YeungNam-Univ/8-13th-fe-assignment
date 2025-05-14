@@ -9,28 +9,28 @@ const App = () => {
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
   const [willWatch, setWillWatch] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchMovies = () => {
-      const movies = [];
-      for (let i = 1; i <= 2500; i++) {
-        movies.push({
-          id: i,
-          title: `Movie ${i}`,
-          description: `Description for Movie ${i}`,
-        });
-
-        console.log("2500개의 영화 목록을 가져오는 중...");
-      }
-
-      // fetchMovies함수가 동작하는데 오래 걸린다고 가정하기 위한 코드
-      alert("데이터를 가져오는 중입니다...");
-
-      return movies;
-    };
     const resultList = fetchMovies();
     setMovies(resultList);
+    setIsLoading(false);
   }, []);
+
+  const fetchMovies = () => {
+    const movies = [];
+    for (let i = 1; i <= 2500; i++) {
+      movies.push({
+        id: i,
+        title: `Movie ${i}`,
+        description: `Description for Movie ${i}`,
+      });
+
+      console.log("2500개의 영화 목록을 가져오는 중...");
+    }
+    alert("데이터를 가져오는 중입니다...");
+    return movies;
+  };
 
   const handleAddToWatched = (id) => {
     const movie = movies.find((m) => m.id === id);
@@ -59,30 +59,37 @@ const App = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <div className="flex flex-1">
-        {/* Left */}
-        <div className="w-1/5 bg-gray-100">
-          <WatchedList
-            watchedMovies={watched}
-            onDelete={handleDeleteFromWatched}
-          />
+      {isLoading ? (
+        <div className="flex flex-1 items-center justify-center text-3xl font-bold">
+          Loading...
         </div>
-        {/* Center */}
-        <div className="w-3/5 overflow-y-auto max-h-[calc(100vh-160px)]">
-          <MovieList
-            movies={movies}
-            onAddToWatched={handleAddToWatched}
-            onAddToWillWatch={handleAddToWillWatch}
-          />
+      ) : (
+        <div className="flex flex-1">
+          {/* Left */}
+          <div className="w-1/5 bg-gray-100">
+            <WatchedList
+              watchedMovies={watched}
+              onDelete={handleDeleteFromWatched}
+            />
+          </div>
+          {/* Center */}
+          <div className="w-3/5 overflow-y-auto max-h-[calc(100vh-160px)]">
+            <MovieList
+              movies={movies}
+              onAddToWatched={handleAddToWatched}
+              onAddToWillWatch={handleAddToWillWatch}
+            />
+          </div>
+          {/* Right */}
+          <div className="w-1/5 bg-gray-100">
+            <WillWatchList
+              willWatchMovies={willWatch}
+              onDelete={handleDeleteFromWillWatch}
+            />
+          </div>
         </div>
-        {/* Right */}
-        <div className="w-1/5 bg-gray-100">
-          <WillWatchList
-            willWatchMovies={willWatch}
-            onDelete={handleDeleteFromWillWatch}
-          />
-        </div>
-      </div>
+      )}
+
       <Footer />
     </div>
   );
