@@ -1,7 +1,10 @@
 import React from "react";
+import MovieList from "./MovieList";
 
-const App = () => {
-  return <div>App</div>;
-};
-
-export default App;
+export default function App() {
+  return (
+    <div>
+      <MovieList />
+    </div>
+  );
+}
